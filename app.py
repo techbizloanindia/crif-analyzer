@@ -169,8 +169,8 @@ def ndash(v) -> str:
 # ── No sidebar — API removed ─────────────────────────────────────────────────
 
 # ── Login Gate ───────────────────────────────────────────────────────────────
-APP_USERNAME = "crif.analaysier"
-APP_PASSWORD = "Credit.team@analyiser"
+APP_USERNAME = "crif.analyzer"
+APP_PASSWORD = "Credit.team@analyzer"
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False

@@ -45,8 +45,8 @@ The app is protected by a login screen. Use the following credentials to sign in
 
 | Field | Value |
 |-------|-------|
-| **Username** | `crif.analaysier` |
-| **Password** | `Credit.team@analyiser` |
+| **Username** | `crif.analyzer` |
+| **Password** | `Credit.team@analyzer` |
 
 > ⚠️ These are stored in `app.py`. Change them there if you need different access details.
 

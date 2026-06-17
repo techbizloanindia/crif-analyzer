@@ -60,8 +60,8 @@ REM ---------------------------------------------------------------
 echo [2/2] Starting the app...
 echo.
 echo   The app will open in your browser at: http://localhost:8501
-echo   Login    Username: crif.analaysier
-echo            Password: Credit.team@analyiser
+echo   Login    Username: crif.analyzer
+echo            Password: Credit.team@analyzer
 echo.
 echo   Keep this window open while using the app.
 echo   Press Ctrl+C here to stop the app.
