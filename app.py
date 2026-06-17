@@ -285,7 +285,7 @@ def render_login() -> None:
         st.markdown("""
         <div class="login-brand">
           <span class="login-eyebrow">High Mark · Credit Intelligence</span>
-          <h1>CRIF Credit Analyzer</h1>
+          <h1>Bizloan CRIF Credit Analyzer</h1>
           <div class="accent-line"></div>
           <p>Welcome back — please sign in to continue</p>
         </div>
