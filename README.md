@@ -14,6 +14,19 @@ A powerful Streamlit web application that parses **CRIF High Mark credit report 
 
 ## 🚀 Quick Start
 
+### ▶️ One-click (Windows — easiest)
+
+Just **double-click `run.bat`**.
+
+The script will automatically:
+1. Check that Python is installed
+2. Detect and **auto-install any missing modules** from `requirements.txt`
+3. Launch the app and open it in your browser at `http://localhost:8501`
+
+> No commands to type — if dependencies are missing the first time, they install themselves.
+
+### 💻 Manual (any OS)
+
 ```bash
 # Clone the repo
 git clone https://github.com/YOUR_USERNAME/crif-analyzer.git
@@ -25,6 +38,17 @@ pip install -r requirements.txt
 # Run the app
 streamlit run app.py
 ```
+
+## 🔐 Login Credentials
+
+The app is protected by a login screen. Use the following credentials to sign in:
+
+| Field | Value |
+|-------|-------|
+| **Username** | `crif.analaysier` |
+| **Password** | `Credit.team@analyiser` |
+
+> ⚠️ These are stored in `app.py`. Change them there if you need different access details.
 
 ## 📦 Dependencies
 

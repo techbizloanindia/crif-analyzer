@@ -168,6 +168,162 @@ def ndash(v) -> str:
 
 # ── No sidebar — API removed ─────────────────────────────────────────────────
 
+# ── Login Gate ───────────────────────────────────────────────────────────────
+APP_USERNAME = "crif.analaysier"
+APP_PASSWORD = "Credit.team@analyiser"
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+
+def render_login() -> None:
+    """Show the login screen and block the rest of the app until authenticated."""
+    # ── Login-only styling ────────────────────────────────────────────────────
+    st.markdown("""
+    <style>
+    /* Hide Streamlit chrome on the login screen */
+    #MainMenu, header[data-testid="stHeader"], footer { visibility: hidden; }
+    .block-container { padding-top: 3.5rem; max-width: 100% !important; }
+
+    /* Soft branded backdrop */
+    .stApp {
+        background:
+            radial-gradient(900px 500px at 15% -10%, rgba(46,117,182,0.18), transparent 60%),
+            radial-gradient(900px 500px at 110% 110%, rgba(15,36,68,0.22), transparent 55%),
+            linear-gradient(160deg, #0b1b33 0%, #0f2444 45%, #112a52 100%);
+    }
+
+    /* Brand header above the card */
+    .login-brand { text-align:center; margin: 0 auto 26px; }
+    .login-eyebrow {
+        display:inline-block; margin-bottom: 14px;
+        font-size: 0.72rem; font-weight: 700; letter-spacing: 3.5px;
+        text-transform: uppercase; color: #7fb4e8;
+        padding: 5px 16px; border-radius: 30px;
+        background: rgba(46,117,182,0.15);
+        border: 1px solid rgba(127,180,232,0.35);
+    }
+    .login-brand h1 {
+        margin: 0; font-weight: 800;
+        font-size: 2.9rem; line-height: 1.08; letter-spacing: -1px;
+        background: linear-gradient(120deg, #ffffff 0%, #cfe3fb 45%, #7fb4e8 100%);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 2px 30px rgba(127,180,232,0.25);
+    }
+    .login-brand .accent-line {
+        width: 64px; height: 4px; margin: 16px auto 0;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #2e75b6, #7fb4e8);
+    }
+    .login-brand p {
+        margin: 14px 0 0; color: rgba(255,255,255,0.6);
+        font-weight: 300; font-size: 0.98rem; letter-spacing: 0.3px;
+    }
+
+    /* The form rendered as a glass card */
+    div[data-testid="stForm"] {
+        background: rgba(255,255,255,0.97);
+        border: 1px solid rgba(255,255,255,0.6);
+        border-radius: 22px;
+        padding: 34px 34px 28px !important;
+        box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+        backdrop-filter: blur(6px);
+    }
+
+    /* Field labels */
+    div[data-testid="stForm"] label p {
+        font-weight: 600 !important; font-size: 0.82rem !important;
+        color: #334155 !important; letter-spacing: 0.2px;
+    }
+
+    /* Inputs */
+    div[data-testid="stForm"] input {
+        background: #f8fafc !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        padding: 12px 14px !important;
+        font-size: 0.95rem !important;
+        color: #0f172a !important;
+        transition: all 0.2s ease;
+    }
+    div[data-testid="stForm"] input:focus {
+        border-color: #2e75b6 !important;
+        box-shadow: 0 0 0 4px rgba(46,117,182,0.15) !important;
+        background: #fff !important;
+    }
+    div[data-baseweb="input"] { border-radius: 12px !important; }
+    div[data-baseweb="input"]:has(input:focus) { border-color: transparent !important; }
+
+    /* Submit button */
+    div[data-testid="stForm"] button[kind="primaryFormSubmit"] {
+        background: linear-gradient(135deg, #2e75b6 0%, #1a3a6b 100%) !important;
+        border: none !important; border-radius: 12px !important;
+        padding: 12px 0 !important; margin-top: 8px;
+        font-weight: 700 !important; font-size: 0.98rem !important;
+        letter-spacing: 0.3px; color: #fff !important;
+        box-shadow: 0 10px 24px rgba(46,117,182,0.4) !important;
+        transition: all 0.25s ease;
+    }
+    div[data-testid="stForm"] button[kind="primaryFormSubmit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(46,117,182,0.55) !important;
+        filter: brightness(1.06);
+    }
+
+    /* Footer note */
+    .login-foot {
+        text-align:center; margin-top: 18px;
+        color: rgba(255,255,255,0.55); font-size: 0.78rem;
+    }
+    .login-foot b { color: rgba(255,255,255,0.8); font-weight: 600; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    _, mid, _ = st.columns([1, 1.15, 1])
+    with mid:
+        st.markdown("""
+        <div class="login-brand">
+          <span class="login-eyebrow">High Mark · Credit Intelligence</span>
+          <h1>CRIF Credit Analyzer</h1>
+          <div class="accent-line"></div>
+          <p>Welcome back — please sign in to continue</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        with st.form("login_form"):
+            username = st.text_input("USERNAME", placeholder="Enter your username")
+            password = st.text_input("PASSWORD", type="password", placeholder="Enter your password")
+            submitted = st.form_submit_button("Sign In  →", use_container_width=True, type="primary")
+
+        if submitted:
+            if username == APP_USERNAME and password == APP_PASSWORD:
+                st.session_state.authenticated = True
+                st.rerun()
+            elif not username or not password:
+                st.warning("Please enter both your username and password.")
+            else:
+                st.error("Invalid username or password. Please try again.")
+
+        st.markdown("""
+        <div class="login-foot">
+          🔒 Protected portal · <b>CRIF High Mark</b> Credit Analyzer<br>
+          Authorized personnel only
+        </div>
+        """, unsafe_allow_html=True)
+
+
+if not st.session_state.authenticated:
+    render_login()
+    st.stop()
+
+# ── Logout control ────────────────────────────────────────────────────────────
+_, _logout_col = st.columns([6, 1])
+with _logout_col:
+    if st.button("🚪 Logout", use_container_width=True):
+        st.session_state.authenticated = False
+        st.rerun()
+
 # ── Title Banner ───────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="title-banner">
